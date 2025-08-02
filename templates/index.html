@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Bridge Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            left: 70%;
+            animation-delay: 4s;
+        }
+
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            left: 80%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 
+                0 32px 64px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            width: 700px;
+            max-width: 95%;
+            transform: translateY(20px);
+            animation: slideUp 0.8s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #6b7280;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+            letter-spacing: 0.025em;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 16px;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+            background: #ffffff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 
+                0 0 0 4px rgba(102, 126, 234, 0.1),
+                0 4px 12px rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+
+        input[type="text"]:hover:not(:focus) {
+            border-color: #d1d5db;
+            transform: translateY(-1px);
+        }
+
+        .submit-wrapper {
+            grid-column: 1 / -1;
+            margin-top: 20px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="submit"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        input[type="submit"]:hover::before {
+            left: 100%;
+        }
+
+        input[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 24px rgba(102, 126, 234, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        input[type="submit"]:active {
+            transform: translateY(-1px);
+        }
+
+        .team-section {
+            margin-top: 50px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 1s ease-in-out 0.5s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .team-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 15px;
+        }
+
+        .team-members {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .member {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #475569;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .member:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+        }
+
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 30px 25px;
+                width: 100%;
+                margin: 10px;
+            }
+
+            form {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .team-members {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>Smart Bridge Project</h1>
+                <div class="subtitle">Electric Motor Temperature Predictor</div>
+                <div class="badge pulse">AI Powered</div>
+            </div>
+
+            <form action="/predict" method="POST">
+                <div class="form-group">
+                    <label for="u_q">
+                        <span class="icon">⚡</span>Voltage U_q
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="u_q" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="coolant">
+                        <span class="icon">❄️</span>Coolant Temp (°C)
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="coolant" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="stator_winding">
+                        <span class="icon">🔧</span>Stator Winding Temp (°C)
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="stator_winding" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="u_d">
+                        <span class="icon">⚡</span>Voltage U_d
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="u_d" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="stator_tooth">
+                        <span class="icon">⚙️</span>Stator Tooth Temp (°C)
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="stator_tooth" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="motor_speed">
+                        <span class="icon">🏃</span>Motor Speed (rpm)
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="motor_speed" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="i_d">
+                        <span class="icon">🔌</span>Current I_d
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="i_d" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="i_q">
+                        <span class="icon">🔌</span>Current I_q
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="i_q" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="stator_yoke">
+                        <span class="icon">🔩</span>Stator Yoke Temp (°C)
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="stator_yoke" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ambient">
+                        <span class="icon">🌡️</span>Ambient Temp (°C)
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="ambient" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="torque">
+                        <span class="icon">🔄</span>Torque (Nm)
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" name="torque" required>
+                    </div>
+                </div>
+
+                <div class="submit-wrapper">
+                    <input type="submit" value="🔮 Predict Rotor Temperature">
+                </div>
+            </form>
+        </div>
+
+        <div class="team-section">
+            <div class="team-title">👥 Development Team</div>
+            <div class="team-members">
+                <div class="member">Suyash Dahitule</div>
+                <div class="member">Ketan Sonawane</div>
+                <div class="member">Prasad Ingole</div>
+                <div class="member">Shreya Babar</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
