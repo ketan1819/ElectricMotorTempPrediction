@@ -115,5 +115,5 @@ This project was developed under the guidance of mentors as part of the **Experi
 
 ## 👤 Author
 
-- **Name**: *[Suyash Dahitule and Team]*  
+- **Name**: *[Ketan Sonawane And Team]*  
 - **GitHub**: [ketan1819](https://github.com/ketan1819)
