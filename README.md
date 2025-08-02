@@ -23,7 +23,7 @@ ElectricMotorTempPrediction/
 │
 ├── app.py                           # Flask app code
 ├── model/
-│   └── model.save                   # Trained SVR model file
+│   └── model.save                   # Trained Random forest regression model
 ├── templates/
 │   ├── index.html                   # User input form
 │   └── result.html                  # Prediction result page
@@ -76,7 +76,7 @@ Ensure Python 3.12+ is installed. Then run:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/ElectricMotorTempPrediction
+git clone https://github.com/ketan1819/ElectricMotorTempPrediction
 
 cd ElectricMotorTempPrediction
 
