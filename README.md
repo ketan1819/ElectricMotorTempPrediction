@@ -9,6 +9,11 @@ A **Machine Learning-powered Flask web application** that predicts the temperatu
 
 To design and deploy a predictive model for electric motor temperature using **Random Forest Regression Model** and serve predictions through a user-friendly **Flask web application**.
 
+🌐 Live Demo: [Video Demo on Google Drive](https://drive.google.com/drive/folders/1gk4LbHX-LQFN8aQPQXoP7ouJ1zy9Nslp?usp=sharing)  
+📸 Screenshots: [Screenshots Folder](https://drive.google.com/drive/folders/1kXAT0e9yQobW273-G6vaZXgs1FnqEkQD?usp=sharing)  
+📦 Dataset: [Kaggle Dataset](https://www.kaggle.com/wkirgsn/electric-motor-temperature)  
+📁 Model File: [model.save on Google Drive](https://drive.google.com/file/d/1Udpfrar06AOC-YxZEyobbErAoYF3SA-v/view?usp=sharing)
+
 ---
 
 ## 📁 Project Structure
@@ -96,6 +101,14 @@ Open `http://127.0.0.1:5000/` in your browser.
 
 🔗 [Click to Watch the Demo on Google Drive](https://drive.google.com/drive/folders/1gk4LbHX-LQFN8aQPQXoP7ouJ1zy9Nslp?usp=sharing)
 
+---
+If you'd like to retrain:
+
+Open notebook/Rotor_motor_temp_detection.ipynb
+
+Train model on full dataset
+
+Export model to model/model.save
 ---
 
 ## 📌 Key Learnings
