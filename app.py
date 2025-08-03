@@ -2,24 +2,24 @@ from flask import Flask, render_template, request
 import numpy as np
 import joblib
 import os
-import gdown  # ✅ added gdown
+import gdown  # added gdown
 
 app = Flask(__name__)
 
-# ✅ Google Drive file ID (from your model link)
+# Google Drive file ID (from your model link)
 FILE_ID = "16naK6NUPZCwyMirlZSiDt0_ORTomw3XK"
 MODEL_PATH = os.path.join('model', 'model.save')
 
-# ✅ Ensure model directory exists
+# Ensure model directory exists
 os.makedirs('model', exist_ok=True)
 
-# ✅ Download model using gdown
+# Download model using gdown
 if not os.path.exists(MODEL_PATH):
     print("Downloading model...")
     gdown.download(f"https://drive.google.com/uc?id={FILE_ID}", MODEL_PATH, quiet=False)
     print("Model downloaded successfully.")
 
-# ✅ Load model
+# Load model
 model = joblib.load(MODEL_PATH)
 
 @app.route('/')
@@ -50,3 +50,4 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
